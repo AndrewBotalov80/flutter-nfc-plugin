@@ -31,9 +31,17 @@ class NfcPlugin {
 
   /// Check if the app was started with NFC
   /// and get NFC message started with
-  Future<NfcEvent> get nfcStartedWith =>
-      _methodChannel.invokeMethod<dynamic>('getNfcStartedWith').then<NfcEvent>(
-          (dynamic event) => event != null ? NfcEvent.fromMap(event) : null!);
+  Future<NfcEvent?> nfcStartedWith() async {
+    final dynamic? event =
+        await _methodChannel.invokeMethod<dynamic>('getNfcStartedWith');
+    if (event != null) {
+      return NfcEvent.fromMap(event);
+    } else {
+      return null;
+    }
+    // .then<NfcEvent>(
+    //       (dynamic? event) async => event != null ? NfcEvent.fromMap(event) : null,);
+  }
 
   /// Fires whenever the nfc message received.
   Stream<NfcEvent>? get onNfcMessage {

@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp> {
     }
 
     try {
-      final NfcEvent _nfcEventStartedWith = await nfcPlugin.nfcStartedWith;
+      final NfcEvent _nfcEventStartedWith = await nfcPlugin.nfcStartedWith();
       print('NFC event started with is ${_nfcEventStartedWith.toString()}');
       if (_nfcEventStartedWith != null) {
         setState(() {
